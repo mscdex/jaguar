@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 
 echo
-#MW=$1 node $2 &
-#MW=$1 ~/tmp/node/node-v0.11.14-linux-x64/bin/node $2 &
-MW=$1 ~/tmp/node/node-v0.10.31-linux-x64/bin/node $2 &
-#MW=$1 ~/tmp/node/node-v0.10.32-linux-x64/bin/node $2 &
-#MW=$1 ~/git/node/out/Release/node $2 &
+MW=$1 node $2 &
 pid=$!
 
 sleep 2
