@@ -23,9 +23,3 @@ app.use(function(req, res, next){
 
 http.createServer(app.handler).listen(3333);
 
-/*var body = new Buffer('Hello World');
-http.createServer(function(req, res) {
-  res.writeHead(200);
-  res.end(body);
-}).listen(3333);
-*/
