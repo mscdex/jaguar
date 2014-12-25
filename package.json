@@ -1,7 +1,7 @@
 { "name": "supersonic",
   "version": "0.0.0",
   "author": "Brian White <mscdex@mscdex.net>",
-  "description": "A middleware-based http server",
+  "description": "A fast, middleware-based http server",
   "main": "./lib/router",
   "engines": { "node": ">=0.10.0" },
   "scripts": {
