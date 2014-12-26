@@ -266,7 +266,7 @@ var tests = [
           subrouter = new Router();
 
       router.use('/foo', subrouter);
-      subrouter.use('/bar', function (req, res) {
+      subrouter.use('/bar', function(req, res) {
         res.end("i'm foo bar");
       });
 
