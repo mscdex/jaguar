@@ -61,7 +61,7 @@ var tests = [
       var what = this.what,
           router = new Router();
 
-      router.get(/\/foo.*/, function(req, res) {
+      router.get(/^\/foo.*/, function(req, res) {
         res.statusCode = 200;
         res.end('Hello World!');
       });
