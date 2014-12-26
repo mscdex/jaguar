@@ -85,6 +85,33 @@ var tests = [
       var what = this.what,
           router = new Router();
 
+      router.get(/^\/foo\/([^/]+)/, function(req, res) {
+        assert.deepEqual(req.$.params,
+                         { 0: 'bar' },
+                         makeMsg(what, 'Wrong req params'));
+        res.statusCode = 200;
+        res.end('Hello World!');
+      });
+
+      request(router, this.req, function(err, res) {
+        assert(!err, makeMsg(what, 'Unexpected error: ' + err));
+        assert(res.statusCode === 200,
+               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
+        assert(res.data === 'Hello World!',
+               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        next();
+      });
+    },
+    req: {
+      method: 'GET',
+      path: '/foo/bar/baz'
+    },
+    what: 'GET (regexp path with param)'
+  },
+  { run: function() {
+      var what = this.what,
+          router = new Router();
+
       router.get('/foo/:val', function(req, res) {
         res.statusCode = 200;
         res.end(''+req.$.params.val);
@@ -284,6 +311,34 @@ var tests = [
       path: '/foo/bar'
     },
     what: 'router mounted on a router'
+  },
+  { run: function() {
+      var what = this.what,
+          router = new Router(),
+          subrouter = new Router();
+
+      router.use('/foo', subrouter);
+      subrouter.use(/^\/(bar|baz)/i, function(req, res) {
+        assert.deepEqual(req.$.params,
+                         { 0: 'bar' },
+                         makeMsg(what, 'Wrong req params'));
+        res.end("i'm subrouter");
+      });
+
+      request(router, this.req, function(err, res) {
+        assert(!err, makeMsg(what, 'Unexpected error: ' + err));
+        assert(res.statusCode === 200,
+               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
+        assert(res.data === "i'm subrouter",
+               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        next();
+      });
+    },
+    req: {
+      method: 'GET',
+      path: '/foo/bar'
+    },
+    what: 'regex concat'
   },
 ];
 
