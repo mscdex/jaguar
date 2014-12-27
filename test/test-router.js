@@ -20,10 +20,13 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === 'Hello World!',
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     'Hello World!',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -44,10 +47,13 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === 'Hello World!',
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     'Hello World!',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -68,10 +74,13 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === 'Hello World!',
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     'Hello World!',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -95,10 +104,13 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === 'Hello World!',
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     'Hello World!',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -119,10 +131,13 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === 'bar',
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     'bar',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -142,11 +157,14 @@ var tests = [
       });
 
       request(router, this.req, function(err, res) {
-        //assert(err, makeMsg(what, 'Expected error'));
-        assert(res.statusCode === 404,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === 'GET /bar Not Found',
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert(!err, makeMsg(what, 'Unexpected error: ' + err));
+        assert.equal(res.statusCode,
+                     404,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     'GET /bar Not Found',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -171,11 +189,14 @@ var tests = [
       });
 
       request(router, this.req, function(err, res) {
-        //assert(err, makeMsg(what, 'Expected error'));
-        assert(res.statusCode === 418,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === 'GET /foo Unknown Error',
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert(!err, makeMsg(what, 'Unexpected error: ' + err));
+        assert.equal(res.statusCode,
+                     418,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     'GET /foo Unknown Error',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -201,10 +222,13 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === 'val is baz',
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     'val is baz',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -233,14 +257,16 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === [
-                 'hello from first GET handler',
-                 'hello from intermediate middleware',
-                 'hello from second GET handler'
-               ].join('\n'),
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     [ 'hello from first GET handler',
+                       'hello from intermediate middleware',
+                       'hello from second GET handler'
+                     ].join('\n'),
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -270,14 +296,16 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === [
-                 'hello from first GET handler',
-                 'hello from second GET handler',
-                 'hello from third GET handler'
-               ].join('\n'),
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     [ 'hello from first GET handler',
+                       'hello from second GET handler',
+                       'hello from third GET handler'
+                     ].join('\n'),
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -299,10 +327,13 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === "i'm foo bar",
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     "i'm foo bar",
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -327,10 +358,13 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === "i'm subrouter",
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     "i'm subrouter",
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -359,10 +393,7 @@ function request(router, reqOpts, cb) {
         if (called)
           return;
         res.data = buffer;
-        if (res.statusCode !== 200)
-          cb(new Error(buffer), res);
-        else
-          cb(null, res);
+        cb(null, res);
       }).on('error', function(err) {
         called = true;
         cb(err);
