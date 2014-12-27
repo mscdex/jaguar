@@ -138,6 +138,79 @@ var tests = [
           router = new Router();
 
       router.get(function(req, res) {
+        res.$.links('http://google.com');
+        res.end();
+      });
+
+      request(router, this.req, function(err, res) {
+        assert(!err, makeMsg(what, 'Unexpected error: ' + err));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.headers.link,
+                     '<http://google.com>',
+                     makeMsg(what,
+                             'Wrong response link header: '
+                             + res.headers.link));
+        next();
+      });
+    },
+    req: {
+      method: 'GET',
+      path: '/'
+    },
+    what: 'links(string)'
+  },
+  { run: function() {
+      var what = this.what,
+          router = new Router();
+
+      router.get(function(req, res) {
+        res.$.links([
+          'http://google.com',
+          'http://yahoo.com',
+          { url: 'http://twitter.com',
+            rel: 'next',
+            title: 'Twitter'
+          },
+          { url: 'http://facebook.com',
+            rel: 'previous',
+            'title*': "UTF-8'en'Facebook"
+          },
+        ]);
+        res.end();
+      });
+
+      request(router, this.req, function(err, res) {
+        assert(!err, makeMsg(what, 'Unexpected error: ' + err));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.headers.link,
+                     ['<http://google.com>',
+                      '<http://yahoo.com>',
+                      '<http://twitter.com>; rel="next"; title="Twitter"',
+                      '<http://facebook.com>; rel="previous"; title*=UTF-8\'en\'Facebook'
+                     ].join(', '),
+                     makeMsg(what,
+                             'Wrong response link header: '
+                             + res.headers.link));
+        next();
+      });
+    },
+    req: {
+      method: 'GET',
+      path: '/'
+    },
+    what: 'links(array)'
+  },
+  { run: function() {
+      var what = this.what,
+          router = new Router();
+
+      router.get(function(req, res) {
         res.$.send('foo');
       });
 
