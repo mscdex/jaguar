@@ -19,10 +19,14 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.headers['content-type'] === 'application/json; charset=utf-8',
-               makeMsg(what, 'Wrong response content-type: '
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.headers['content-type'],
+                     'application/json; charset=utf-8',
+                     makeMsg(what,
+                             'Wrong response content-type header: '
                              + res.headers['content-type']));
         assert.deepEqual(JSON.parse(res.data),
                          { foo: 'bar' },
@@ -34,7 +38,7 @@ var tests = [
       method: 'GET',
       path: '/'
     },
-    what: 'json(obj)'
+    what: 'json(object)'
   },
   { run: function() {
       var what = this.what,
@@ -46,10 +50,14 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 418,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.headers['content-type'] === 'application/json; charset=utf-8',
-               makeMsg(what, 'Wrong response content-type: '
+        assert.equal(res.statusCode,
+                     418,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.headers['content-type'],
+                     'application/json; charset=utf-8',
+                     makeMsg(what,
+                             'Wrong response content-type header: '
                              + res.headers['content-type']));
         assert.deepEqual(JSON.parse(res.data),
                          { foo: 'bar' },
@@ -61,7 +69,7 @@ var tests = [
       method: 'GET',
       path: '/'
     },
-    what: 'json(status, obj)'
+    what: 'json(status, object)'
   },
   { run: function() {
       var what = this.what,
@@ -73,14 +81,18 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.headers['content-type'] === 'text/javascript; charset=utf-8',
-               makeMsg(what, 'Wrong response content-type: '
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.headers['content-type'],
+                     'text/javascript; charset=utf-8',
+                     makeMsg(what,
+                             'Wrong response content-type header: '
                              + res.headers['content-type']));
-        assert.deepEqual(res.data,
-                         '/**/ typeof cb === \'function\' && cb("foo");',
-                         makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.data,
+                     '/**/ typeof cb === \'function\' && cb("foo");',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -88,7 +100,7 @@ var tests = [
       method: 'GET',
       path: '/?callback=cb'
     },
-    what: 'jsonp(obj)'
+    what: 'jsonp(object)'
   },
   { run: function() {
       var what = this.what,
@@ -100,14 +112,18 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 418,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.headers['content-type'] === 'text/javascript; charset=utf-8',
-               makeMsg(what, 'Wrong response content-type: '
+        assert.equal(res.statusCode,
+                     418,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.headers['content-type'],
+                     'text/javascript; charset=utf-8',
+                     makeMsg(what,
+                             'Wrong response content-type header: '
                              + res.headers['content-type']));
-        assert.deepEqual(res.data,
-                         '/**/ typeof cb === \'function\' && cb("foo");',
-                         makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.data,
+                     '/**/ typeof cb === \'function\' && cb("foo");',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -115,7 +131,7 @@ var tests = [
       method: 'GET',
       path: '/?callback=cb'
     },
-    what: 'jsonp(status, obj)'
+    what: 'jsonp(status, object)'
   },
   { run: function() {
       var what = this.what,
@@ -127,10 +143,13 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 200,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === 'foo',
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     'foo',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -150,8 +169,10 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 418,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.statusCode,
+                     418,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
         next();
       });
     },
@@ -171,10 +192,13 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 418,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === 'foo',
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     418,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     'foo',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
@@ -195,10 +219,13 @@ var tests = [
 
       request(router, this.req, function(err, res) {
         assert(!err, makeMsg(what, 'Unexpected error: ' + err));
-        assert(res.statusCode === 418,
-               makeMsg(what, 'Wrong response statusCode: ' + res.statusCode));
-        assert(res.data === 'foo',
-               makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        assert.equal(res.statusCode,
+                     418,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     'foo',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
     },
