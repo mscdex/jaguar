@@ -1,4 +1,4 @@
-var Router = require('../lib/router');
+var Router = require('../lib/Router');
 
 var http = require('http'),
     path = require('path'),
