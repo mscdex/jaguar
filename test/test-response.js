@@ -211,9 +211,16 @@ var tests = [
           router = new Router();
 
       router.config['view engine'] = 'ejs';
+      router.config['views'] = __dirname + '/views';
 
+      router.locals.foo = '1';
+
+      router.use(function(req, res, next) {
+        res.$.locals.bar = '2';
+        next();
+      });
       router.get(function(req, res) {
-        res.$.render('foo', { foo: 'bar' });
+        res.$.render('foo', { baz: '3' });
       });
 
       request(router, this.req, function(err, res) {
@@ -223,7 +230,10 @@ var tests = [
                      makeMsg(what,
                              'Wrong response statusCode: ' + res.statusCode));
         assert.equal(res.data,
-                     'The value of foo is: bar\n',
+                     ['The value of foo is: 1',
+                      'The value of bar is: 2',
+                      'The value of baz is: 3'
+                     ].join('\n'),
                      makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
@@ -232,7 +242,7 @@ var tests = [
       method: 'GET',
       path: '/'
     },
-    what: 'render(view)'
+    what: 'render(view, vars)'
   },
   { run: function() {
       var what = this.what,
