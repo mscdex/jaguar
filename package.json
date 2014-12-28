@@ -1,4 +1,4 @@
-{ "name": "supersonic",
+{ "name": "jaguar",
   "version": "0.0.0",
   "author": "Brian White <mscdex@mscdex.net>",
   "description": "A fast, middleware-based http server",
@@ -11,6 +11,6 @@
     "path-to-regexp": "1.0.x"
   },
   "keywords": [ "optimized", "http", "middleware", "server" ],
-  "licenses": [ { "type": "MIT", "url": "https://github.com/mscdex/supersonic/raw/master/LICENSE" } ],
-  "repository": { "type": "git", "url": "https://github.com/mscdex/supersonic.git" }
+  "licenses": [ { "type": "MIT", "url": "https://github.com/mscdex/jaguar/raw/master/LICENSE" } ],
+  "repository": { "type": "git", "url": "https://github.com/mscdex/jaguar.git" }
 }
