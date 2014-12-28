@@ -210,6 +210,34 @@ var tests = [
       var what = this.what,
           router = new Router();
 
+      router.config['view engine'] = 'ejs';
+
+      router.get(function(req, res) {
+        res.$.render('foo', { foo: 'bar' });
+      });
+
+      request(router, this.req, function(err, res) {
+        assert(!err, makeMsg(what, 'Unexpected error: ' + err));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     'The value of foo is: bar\n',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        next();
+      });
+    },
+    req: {
+      method: 'GET',
+      path: '/'
+    },
+    what: 'render(view)'
+  },
+  { run: function() {
+      var what = this.what,
+          router = new Router();
+
       router.get(function(req, res) {
         res.$.send('foo');
       });
