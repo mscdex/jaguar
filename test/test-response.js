@@ -346,6 +346,64 @@ var tests = [
     },
     what: 'status(status)'
   },
+  { run: function() {
+      var what = this.what,
+          router = new Router();
+
+      router.get(function(req, res) {
+        res.$.sendStatus(418);
+      });
+
+      request(router, this.req, function(err, res) {
+        assert(!err, makeMsg(what, 'Unexpected error: ' + err));
+        assert.equal(res.statusCode,
+                     418,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.data,
+                     "I'm a teapot",
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        next();
+      });
+    },
+    req: {
+      method: 'GET',
+      path: '/'
+    },
+    what: 'sendStatus(status)'
+  },
+  { run: function() {
+      var what = this.what,
+          router = new Router();
+
+      router.get(function(req, res) {
+        res.$.type('text/empty');
+        res.end();
+      });
+
+      request(router, this.req, function(err, res) {
+        assert(!err, makeMsg(what, 'Unexpected error: ' + err));
+        assert.equal(res.statusCode,
+                     200,
+                     makeMsg(what,
+                             'Wrong response statusCode: ' + res.statusCode));
+        assert.equal(res.headers['content-type'],
+                     'text/empty',
+                     makeMsg(what,
+                             'Wrong response content-type header: '
+                             + res.headers['content-type']));
+        assert.equal(res.data,
+                     '',
+                     makeMsg(what, 'Wrong response: ' + inspect(res.data)));
+        next();
+      });
+    },
+    req: {
+      method: 'GET',
+      path: '/'
+    },
+    what: 'type(contentType)'
+  },
 ];
 
 function request(router, reqOpts, cb) {
