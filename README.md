@@ -51,7 +51,7 @@ Now, what makes jaguar faster (than Express)?
   large).
 
 * Removal of functional Array methods (e.g. `.forEach()`, `.map()`, `.filter()`)
-  and other features which cause slowdowns (e.g. for-in loops).
+  and other language features which cause slowdowns (e.g. for-in loops).
 
 * Other miscellaneous improvements such as caching of static values
   (e.g. RegExps and other objects) that can be safely reused across multiple
