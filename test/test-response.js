@@ -233,7 +233,7 @@ var tests = [
                      ['The value of foo is: 1',
                       'The value of bar is: 2',
                       'The value of baz is: 3'
-                     ].join('\n'),
+                     ].join('. '),
                      makeMsg(what, 'Wrong response: ' + inspect(res.data)));
         next();
       });
